@@ -45,6 +45,9 @@
     createCollectable(type.db, 650, 500);
     createCollectable(type.max, 760, 570);
     createCollectable(type.db, 660, 100, 6, 0.7);
+    createCollectable(type.max, 100, 370);
+    createCollectable(type.max, 300, 55);
+
 
 
     // ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
