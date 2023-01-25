@@ -2,23 +2,28 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Bouncing Box</title>
+	<title>Sheep Counter</title>
 	<script src="jquery.min.js"></script>
 	<style>
 		.box {
-			width: 70px;
-			height: 70px;
-			background-color: teal;
-			font-size: 300%;
+			width: 120px;
+			height: 120px;
+			font-size: 130%;
+			font-family: cursive;
+			color: rgb(0, 0, 0);
+			background-position-x: 4.3cm;
+			background-position-y: 4cm;
 			text-align: center;
 			user-select: none;
 			display: block;
 			position: absolute;
 			top: 100px;
-			left: 0px;  /* <--- Change me! */
+			left: 600px;  /* <--- Change me! */
+			background-image: url("images/sheep.gif");
 		}
 		.board{
 			height: 100vh;
+			background-image: url("images/grassbg.png");
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -26,7 +31,7 @@
 </head>
 <body class="board">
 	<!-- HTML for the box -->
-	<div class="box">?</div>
+	<div class="box">Click!</div>
 
 	<script>
 		(function(){
@@ -42,14 +47,20 @@
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
 
 			// Every 50 milliseconds, call the update Function (see below)
-			setInterval(update, 50);
+			var interval = setInterval(update, 50);
+
+			//ENDGAME
+			function endGame(){
+				clearInterval(interval);
+			}
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
+			function moveBoxTo(newPositionX, newPositionY) {
 				box.css("left", newPositionX);
+				box.css('top', newPositionY);
 			}
 
 			// changes the text displayed on the Box
@@ -62,16 +73,49 @@
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
+			var positionX = 0;
+			var points = 0;
+			var speed = 5;
+			var positionY = 100;
+			var speedY = 5;
+			var boardHeight = jQuery(window).height();
+			var randNum = Math.random()*100
 			
-
-			
-			/* 
+			/* ;/
 			This Function will be called 20 times/second. Each time it is called,
 			it should move the Box to a new location. If the box drifts off the screen
 			turn it around! 
 			*/
 			function update() {
-				
+				// increase posX and posY by 10*
+				positionX = positionX + speed;
+				positionY = positionY + speedY;
+				moveBoxTo(positionX, positionY);
+
+				//bounce to left
+				if (positionX > boardWidth){
+					positionX = positionX - speed
+					speed = -speed;
+					
+
+				}
+
+				//bounce back ( right )
+				if (positionX < 0){
+					positionX = positionX - speed
+					speed = -speed;
+				}
+
+				//uhhh
+				if (positionY > boardHeight){
+					positionY = positionY - speed
+					speedY = -speedY;
+				}
+	
+				//help me
+				if (positionY < 0){
+					speedY = -speedY;
+				}
 
 			};
 
@@ -81,8 +125,23 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				
+				positionX=randNum
 
+				//increase points by 1
+				points = points + 1;
+
+				//increase speed
+				speed = speed + 3
+
+				changeBoxText(points);
+
+				//bug fix idk
+				if( speed > 0 ){
+					speed += 3;
+				}
+				else if(speed<0){
+					speed -=3;
+				}
 
 			};
 		})();
