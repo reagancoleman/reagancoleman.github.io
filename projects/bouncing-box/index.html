@@ -5,6 +5,7 @@
 	<title>Sheep Counter</title>
 	<script src="jquery.min.js"></script>
 	<style>
+
 		.box {
 			width: 120px;
 			height: 120px;
@@ -49,7 +50,7 @@
 			// Every 50 milliseconds, call the update Function (see below)
 			var interval = setInterval(update, 50);
 
-			//ENDGAME
+			//ENDGAME i dunno how to do this >:C
 			function endGame(){
 				clearInterval(interval);
 			}
@@ -79,7 +80,6 @@
 			var positionY = 100;
 			var speedY = 5;
 			var boardHeight = jQuery(window).height();
-			var randNum = Math.random()*100
 			
 			/* ;/
 			This Function will be called 20 times/second. Each time it is called,
@@ -125,13 +125,15 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				positionX=randNum
+				var randNumX = Math.random()*boardWidth
+				var randNumY = Math.random()*boardHeight
+				//??? did i do this right???
+				positionX=randNumX;
+				positionY=randNumY;
 
 				//increase points by 1
 				points = points + 1;
 
-				//increase speed
-				speed = speed + 3
 
 				changeBoxText(points);
 
@@ -139,9 +141,10 @@
 				if( speed > 0 ){
 					speed += 3;
 				}
-				else if(speed<0){
-					speed -=3;
+				else if( speed < 0 ){
+					speed -= 3;
 				}
+
 
 			};
 		})();
