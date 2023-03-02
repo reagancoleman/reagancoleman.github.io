@@ -1,0 +1,11 @@
+/*ok uhh i dont know where to put the image so im just gonna use a color instead*/
+/* nevermind i got it */
+body {
+    background: url("dots2.png") no-repeat center center fixed;
+    background-color: #bcfc9a;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
