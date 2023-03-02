@@ -41,6 +41,7 @@ var init = function (window) {
             drawCircle();
 
         // loopies ( yeah i think this way is easier to do than for loops )
+        //drawing 100 more circles w/ loops
             var loops = 0
             while ( loops < 100 ){
                 drawCircle(loops);
@@ -75,8 +76,8 @@ var init = function (window) {
             
             
             // TODO 5 / 10 : Call game.checkCirclePosition() on your circles.
+            
             // keeping circles inside,,,
-
             game.checkCirclePosition(circles[0]);
             game.checkCirclePosition(circles[1]);
             game.checkCirclePosition(circles[2]);
@@ -87,6 +88,7 @@ var init = function (window) {
             // is this 8?? it has the same title?
             
             //oh wow that actually worked
+            //making all 100 circles move at once w/ loops + keeping them inside
             var loops = 0
             while ( loops < 100 ){
                 physikz.updatePosition(circles[loops]);
@@ -105,22 +107,22 @@ var init = function (window) {
             // if the circle has gone past the RIGHT side of the screen then place it on the LEFT
             if ( circle.x > canvas.width + 20 ) {
                 circle.x = -20;
-            } //right   
+            } //right --> left  
             
             // TODO 6 : YOUR CODE STARTS HERE //////////////////////
             
             if( circle.x < -20 ){
                 circle.x = canvas.width + 20;
-            } //left
+            } //left -- right
             if( circle.y > canvas.height + 20 ){
                 circle.y = -20;
-            } //up?
+            } //up? -- down
             if( circle.y < -20 ){
                 circle.y = canvas.height + 20;
-            } //down??
+            } //down?? -- up
 
             //challenge thing ( hah i made it smooth without doing this >: )
-            var rightEdge = circle.x + circle.radius;
+            var rightEdge = circle.x + circle.radius; //should make the circles move on/off the screen more smoothly
             
 
             // YOUR TODO 6 CODE ENDS HERE //////////////////////////
