@@ -111,6 +111,7 @@ var init = function (window) {
             
             // TODO 6 : YOUR CODE STARTS HERE //////////////////////
             
+            //calculates the width/height of the window so the circles know when to teleport to the opposite side
             if( circle.x < -20 ){
                 circle.x = canvas.width + 20;
             } //left -- right
