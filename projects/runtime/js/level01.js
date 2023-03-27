@@ -16,10 +16,16 @@ var level01 = function (window) {
             "number": 1, 
             "speed": -3,
             "gameItems": [
-                { "type": "sawblade", "x": 400, "y": groundY },
-                { "type": "sawblade", "x": 600, "y": groundY },
-                { "type": "sawblade", "x": 900, "y": groundY },
+                { "type": "sawblade", "x": 400, "y": groundY -56 },
+                { "type": "sawblade", "x": 600, "y": groundY - 50 },
+                { "type": "sawblade", "x": 800, "y": groundY - 56},
+                { "type": "sawblade", "x": 1000, "y": groundY - 56},
+
+                { "type": "enemy", "x": 1200, "y": groundY - 10 },
+
+                { "type": "reward", "x": 500, "y": groundY - 50 },
             ]
+            
         };
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
@@ -28,8 +34,110 @@ var level01 = function (window) {
         // TODO 6 and on go here
         // BEGIN EDITING YOUR CODE HERE
 
+        //FUNCTION!!
+        //(METEOR)
+        function createSawBlade(x, y){
+            //sawblade hitbox/damage/whatever
+            var hitZoneSize = 25; //assigns value to hitbox size
+            var damageFromObstacle = 10; //damage done by hitbox
+            var sawBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle); //creates obstacele and stores it
+            
+            //create obstacles
+            sawBladeHitZone.x = x; //stores x value 4 hitbox
+            sawBladeHitZone.y = y; //stores y value 4 hitbox
+            game.addGameItem(sawBladeHitZone); //adds hitbox as game item
+
+            //sawblade graphics
+            var obstacleImage = draw.bitmap("img/sawblade.png"); //draws image for saw and stores in ObstacleImage
+            sawBladeHitZone.addChild(obstacleImage); // adds obImage as child of sawbladehitzone
+            obstacleImage.x = -25; //assigns value to x position
+            obstacleImage.y = -25; //assigns value to x position
+        }    
+
         
+
+        //ENEMY 1 ( SLUG )
+        function createEnemy(x, y, size, velocity){
+            var enemy = game.createGameItem("enemy", 25);
+        var gameEnemy = draw.bitmap("img/sawblade.png");
+        var damageFromObstacle = 20; //damage done by hitbox
+        gameEnemy.x = -25;
+        gameEnemy.y = -25;
+        enemy.addChild(gameEnemy);
+        enemy.x = x;
+        enemy.y = y;
+        game.addGameItem(enemy);
+        enemy.velocityX = -1;
+
+        enemy.onPlayerCollision = function(){
+            game.changeIntegrity(-10);
+        }
+
+        enemy.onProjectileCollision = function(){
+            game.increaseScore(100);
+            enemy.shrink();
+        }
+
+        }
+
         
+        //SPIKES//
+        function createSpike(x, y){
+            //sawblade hitbox/damage/whatever
+            var hitZoneSize = 25; //assigns value to hitbox size
+            var damageFromObstacle = 20; //damage done by hitbox
+            var spikeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle); //creates obstacele and stores it
+
+            //create obstacles
+            spikeHitZone.x = x; //stores x value 4 hitbox
+            spikeHitZone.y = y; //stores y value 4 hitbox
+            game.addGameItem(spikeHitZone); //adds hitbox as game item
+
+            //sawblade graphics
+            var obstacleImage = draw.bitmap("img/spikess.png"); //draws image for saw and stores in ObstacleImage
+            spikeHitZone.addChild(obstacleImage); // adds obImage as child of sawbladehitzone
+            obstacleImage.x = -30; //assigns value to x position
+            obstacleImage.y = -25; //assigns value to x position
+            
+        };
+
+        
+
+        //helpme ( REWARD )
+        function createReward(x, y ){
+            var reward = game.createGameItem("reward", 25);
+            var gameItem = draw.rect(50, 50, "purple");
+            gameItem.x = -25;
+            gameItem.y = -25;
+            reward.addChild(gameItem);
+            reward.x = x;
+            reward.y = y;
+            game.addGameItem(reward);
+            reward.velocityX = -3;
+
+            reward.onPlayerCollsion = function (){
+                game.changeIntegrity(10);
+                game.increaseScore(100);
+                reward.fadeOut();
+            }
+
+        }
+
+        for ( var i = 0; i < levelData.gameItems.length; i++){
+            var gameItem = levelData.gameItems[i];
+            
+            if (gameItem.type === "sawblade"){
+                createSawBlade(gameItem.x, gameItem.y);
+            }
+
+            if (gameItem.type === "enemy"){
+                createEnemy(gameItem.x, gameItem.y, scale.x);
+            }
+
+            if (gameItem.type === "reward"){
+                createReward(gameItem.x, gameItem.y);
+            }
+        };
         
         // DO NOT EDIT CODE BELOW HERE
     }
