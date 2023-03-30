@@ -28,7 +28,10 @@ var background = function (window) {
         // ANIMATION VARIABLES HERE:
         
         var tree;
-        var buildings = [];
+        // var buildings = [];
+        var mountain;
+        var floor;
+        var floor2;
 
      
         // called at the start of game and whenever the page is resized
@@ -43,6 +46,7 @@ var background = function (window) {
             background.addChild(groundFill);
             var backgroundFill = draw.rect(canvasWidth, groundY,'#1f0d3d');
             background.addChild(backgroundFill);
+
             
             
             // TODO: 3 - Add a moon and starfield
@@ -55,13 +59,30 @@ var background = function (window) {
                 background.addChild(circle); // adds circle as child to BG
             }
 
-            var moon = draw.bitmap("img/moon.png"); //draws the moon using .bitmap and stores it in the moon variable
-            moon.x = canvasWidth - 300; // adds x value to the moon of 300 pixels
+            var moon = draw.bitmap("img/planets.png"); //draws the moon using .bitmap and stores it in the moon variable
+            moon.x = canvasWidth - 770; // adds x value to the moon of 300 pixels
             moon.y = groundY - 350; // adds y value to moon of 200 pixels
             moon.scaleX = 0.5; //scales moons x value
             moon.scaleY = 0.5; //scales moon y value
             background.addChild(moon); //add the moon as a child of bg
-        
+
+            //MOUNTAINS yes there will be a lot of this cause im confused >_<
+            var mountain = draw.bitmap("img/mountain1.png");
+             mountain.x = 0;
+             mountain.y = groundY - 340;
+             mountain.scaleX = 1;
+             mountain.scaleY = 1;
+             background.addChild(mountain);
+            
+            var floor = draw.bitmap("img/surface.png"); 
+            floor.x = 0; 
+            floor.y = groundY - 90; 
+            background.addChild(floor)
+            //ahaha i dont know how to do this optimally
+            var floor2 = draw.bitmap("img/surface.png"); 
+            floor2.x = 1049; 
+            floor2.y = groundY - 90; 
+            background.addChild(floor2)
 
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             /*
@@ -77,26 +98,15 @@ var background = function (window) {
             
                 */
 
-            //MOUNTAINS yes there will be a lot of this cause im very confused >_<
-            var mountain = draw.bitmap("img/mountainstest.png");
-             mountain.x = 0;
-             mountain.y = groundY - 400;
-             mountain.scaleX = 0.5;
-             background.addChild(mountain);
 
             // TODO 4: Part 1 - Add a tree
             
             tree = draw.bitmap("img/tree.png"); //uses bitmap to draw image and stores it in var tree
             tree.x = 100; // assign xv to tree
-            tree.y = groundY - 220; //assign yv to tree
+            tree.y = groundY - 260; //assign yv to tree
             background.addChild(tree); //add tree to bg to make it visible
             
-             //cactus thing
-            
-             var cactus = draw.bitmap("img/tree.png");
-             cactus.x = 350;
-             cactus.y = groundY - 220;
-             background.addChild(cactus);
+             
 
         } // end of render function - DO NOT DELETE
         

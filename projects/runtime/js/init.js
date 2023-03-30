@@ -36,10 +36,10 @@ var init = function (window) {
     view.addChild(background); // adds the bg as a child of view
     
     var help = draw.textfield('CONTROLS: || up - jump | right - flying jump | down - crouch | space - shoot | Q - E X P L O D E', 
-        '15px seriff',
-        '#ccc', 'left');
+        '15px cursive',
+        '#731132', 'left');
     help.x = 10;
-    help.y = ground.y + ground.getBounds().height + 10;
+    help.y = ground.y + ground.getBounds().height + 120;
     view.addChild(help);
     
     window.opspark.makeSpriteSheet(data)
