@@ -32,6 +32,12 @@ var background = function (window) {
         var mountain;
         var floor;
         var floor2;
+        var floor3;
+        var tallCactus;
+        var smallCactus;
+        var bigRock;
+        var smallRock;
+
 
      
         // called at the start of game and whenever the page is resized
@@ -67,37 +73,39 @@ var background = function (window) {
             background.addChild(moon); //add the moon as a child of bg
 
             //MOUNTAINS yes there will be a lot of this cause im confused >_<
-            var mountain = draw.bitmap("img/mountain1.png");
+            mountain = draw.bitmap("img/mountain1.png");
              mountain.x = 0;
              mountain.y = groundY - 340;
              mountain.scaleX = 1;
              mountain.scaleY = 1;
              background.addChild(mountain);
             
-            var floor = draw.bitmap("img/surface.png"); 
+            floor = draw.bitmap("img/surface.png"); 
             floor.x = 0; 
             floor.y = groundY - 90; 
             background.addChild(floor)
             //ahaha i dont know how to do this optimally
-            var floor2 = draw.bitmap("img/surface.png"); 
+            floor2 = draw.bitmap("img/surface.png"); 
             floor2.x = 1049; 
             floor2.y = groundY - 90; 
-            background.addChild(floor2)
+            background.addChild(floor2);
+
+            floor3 = draw.bitmap("img/surface.png"); 
+            floor3.x = 2098; 
+            floor3.y = groundY - 90; 
+            background.addChild(floor3)
+            
 
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            /*
-            for (var i = 0; i < 5; ++i) {
-                var buildingHeights = [ 220, 250, 180, 300 ];
-                var buildingColors = ['cyan', 'limegreen', 'lightpink', 'yellow']
-                var building = draw.rect(75, buildingHeights[i], buildingColors[i], "Black", 1);
-                building.x = 200 * i;
-                building.y = groundY - buildingHeights[i];
-                background.addChild(building);
-                buildings.push(building);
-                }
-            
-                */
-
+            /* for (var i = 0; i < 5; ++i) {
+                    var buildingHeights = [ 220, 250, 180, 300 ];
+                    var buildingColors = ['cyan', 'limegreen', 'lightpink', 'yellow']
+                    var building = draw.rect(75, buildingHeights[i], buildingColors[i], "Black", 1);
+                    building.x = 200 * i;
+                    building.y = groundY - buildingHeights[i];
+                    background.addChild(building);
+                    buildings.push(building);
+                }*/
 
             // TODO 4: Part 1 - Add a tree
             
@@ -127,8 +135,33 @@ var background = function (window) {
             if (tree.x < -300) {
             tree.x = canvasWidth;
             }
+            //mountains
+            mountain.x = mountain.x - 0.5;
 
-            //cactus ??
+            if (mountain.x < -900) {
+                mountain.x = canvasWidth;
+            }
+
+            
+
+            //ground AAAAAAAAAAAAAAAA this took me forever to do ;-;
+            floor.x = floor.x - 1;
+
+            if (floor.x < -1100) {
+                floor.x = canvasWidth + 500;
+            }
+            floor2.x = floor2.x - 1;
+
+            if (floor2.x < -1100) {
+                floor2.x = canvasWidth + 500;
+            } 
+            floor3.x = floor3.x - 1;
+
+            if (floor3.x < -1100) {
+                floor3.x = canvasWidth + 500;
+            } 
+
+            //bg objects
             
             // TODO 5: Part 2 - Parallax
             

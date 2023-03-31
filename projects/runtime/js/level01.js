@@ -72,7 +72,7 @@ var level01 = function (window) {
         enemy.x = x;
         enemy.y = y;
         game.addGameItem(enemy);
-        enemy.velocityX = -1;
+        enemy.velocityX = -1.5;
 
         enemy.onPlayerCollision = function(){
             game.changeIntegrity(-10);
@@ -87,16 +87,16 @@ var level01 = function (window) {
 
         //ENEMY 2 ( BIRD )
         function createEnemy2(x, y, size, velocity){
-            var enemy = game.createGameItem("enemy", 25);
+            var enemy = game.createGameItem("enemy2", 25);
         var gameEnemy = draw.bitmap("img/bird.png");
-        var damageFromObstacle = 20; //damage done by hitbox
+        var damageFromObstacle = 30; //damage done by hitbox
         gameEnemy.x = -50;
         gameEnemy.y = -56;
         enemy.addChild(gameEnemy);
         enemy.x = x;
         enemy.y = y;
         game.addGameItem(enemy);
-        enemy.velocityX = -2;
+        enemy.velocityX = -3;
 
         enemy.onPlayerCollision = function(){
             game.changeIntegrity(-10);
@@ -104,15 +104,15 @@ var level01 = function (window) {
 
         enemy.onProjectileCollision = function(){
             game.increaseScore(100);
-            enemy2.shrink();
+            enemy.shrink();
         }
 
         }
 
         function createEnemy3(x, y, size, velocity){
-            var enemy = game.createGameItem("enemy", 25);
+            var enemy = game.createGameItem("enemy3", 25);
         var gameEnemy = draw.bitmap("img/ufo.png");
-        var damageFromObstacle = 20; //damage done by hitbox
+        var damageFromObstacle = 50; //damage done by hitbox
         gameEnemy.x = -50;
         gameEnemy.y = -56;
         enemy.addChild(gameEnemy);
@@ -127,7 +127,7 @@ var level01 = function (window) {
 
         enemy.onProjectileCollision = function(){
             game.increaseScore(100);
-            enemy2.shrink();
+            enemy.shrink();
         }
 
         }
@@ -153,7 +153,6 @@ var level01 = function (window) {
             
         };
 
-        
 
         //helpme ( REWARD )
         function createReward(x, y ){
@@ -199,9 +198,9 @@ var level01 = function (window) {
 
         //lv1
         createEnemy(400, groundY - 5);
-        createSawBlade(400, 0);
-        createSawBlade(600, -130);
-        createEnemy2(800, groundY - 110);
+        createSawBlade(600, 0);
+        createSawBlade(800, -130);
+        createEnemy2(800, groundY - 40);
         createEnemy3(1000, groundY - 120);
 
         //lv 2
