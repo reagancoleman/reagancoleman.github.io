@@ -35,7 +35,7 @@ var init = function (window) {
     var background = opspark.makeBackground(app, ground); //calls the makeBackground function and stores it in var background
     view.addChild(background); // adds the bg as a child of view
     
-    var help = draw.textfield('CONTROLS: || up - jump | right - flying jump | down - crouch | space - shoot | Q - E X P L O D E', 
+    var help = draw.textfield('CONTROLS: || up - jump | right - flying jump | down - crouch | space - shoot | Q - E X P L O D E | is there a way to loop the obstacles??', 
         '15px cursive',
         '#731132', 'left');
     help.x = 10;
