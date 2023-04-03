@@ -107,12 +107,12 @@ var background = function (window) {
                     buildings.push(building);
                 }*/
 
-            // TODO 4: Part 1 - Add a tree
+            // TODO 4: Part 1 - Add a tree ( i kinda just replaced the tree with cactus, is that okay??)
             
-            tree = draw.bitmap("img/tree.png"); //uses bitmap to draw image and stores it in var tree
-            tree.x = 100; // assign xv to tree
-            tree.y = groundY - 260; //assign yv to tree
-            background.addChild(tree); //add tree to bg to make it visible
+            tallCactus = draw.bitmap("img/cactus.png"); //uses bitmap to draw image and stores it in var tree
+            tallCactus.x = 100; // assign xv to tree
+            tallCactus.y = groundY - 230; //assign yv to tree
+            background.addChild(tallCactus); //add tree to bg to make it visible
             
              
 
@@ -129,11 +129,11 @@ var background = function (window) {
             
             // TODO 4: Part 2 - Move the tree!
             
-            //tree
-            tree.x = tree.x - 1;
+            //tree ( cactus )
+            tallCactus.x = tallCactus.x - 1;
 
-            if (tree.x < -300) {
-            tree.x = canvasWidth;
+            if (tallCactus.x < -300) {
+                tallCactus.x = canvasWidth;
             }
             //mountains
             mountain.x = mountain.x - 0.5;
