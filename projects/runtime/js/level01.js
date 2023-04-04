@@ -29,7 +29,7 @@ var level01 = function (window) {
         };
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
-        game.setDebugMode(true);
+        game.setDebugMode(false);
 
         // TODO 6 and on go here
         // BEGIN EDITING YOUR CODE HERE
@@ -79,7 +79,7 @@ var level01 = function (window) {
         }
 
         enemy.onProjectileCollision = function(){
-            game.increaseScore(100);
+            game.increaseScore(200);
             enemy.shrink();
         }
 
@@ -98,13 +98,17 @@ var level01 = function (window) {
         game.addGameItem(enemy);
         enemy.velocityX = -3;
 
+            if (enemy.x < 0){
+                enemy.x = canvasWidth;
+            }
+
         enemy.onPlayerCollision = function(){
             game.changeIntegrity(-10);
         }
 
         enemy.onProjectileCollision = function(){
-            game.increaseScore(100);
-            enemy.shrink();
+            game.increaseScore(500);
+            enemy.fadeOut();
         }
 
         }
@@ -120,13 +124,18 @@ var level01 = function (window) {
         enemy.y = y;
         game.addGameItem(enemy);
         enemy.velocityX = -2;
+        if(enemy.velocityY < groundY-20 ){
+            enemy.velocityY = +0.2;
+        } else if (enemy.velocityY > groundY-20){
+            enemy.velocityY = -0.2;
+        }
 
         enemy.onPlayerCollision = function(){
             game.changeIntegrity(-10);
         }
 
         enemy.onProjectileCollision = function(){
-            game.increaseScore(100);
+            game.increaseScore(1000);
             enemy.shrink();
         }
 
@@ -146,11 +155,16 @@ var level01 = function (window) {
             game.addGameItem(spikeHitZone); //adds hitbox as game item
 
             //sawblade graphics
-            var obstacleImage = draw.bitmap("img/spikess.png"); //draws image for saw and stores in ObstacleImage
+            var obstacleImage = draw.bitmap("img/spikes.png"); //draws image for saw and stores in ObstacleImage
             spikeHitZone.addChild(obstacleImage); // adds obImage as child of sawbladehitzone
-            obstacleImage.x = -30; //assigns value to x position
-            obstacleImage.y = -25; //assigns value to x position
+            obstacleImage.x = -45; //assigns value to x position
+            obstacleImage.y = -42; //assigns value to x position
             
+            spikeHitZone.velocityX = -1;
+
+            if (spikeHitZone.x < 100) {
+                spikeHitZone.x = canvasWidth;
+            }
         };
 
 
@@ -166,9 +180,9 @@ var level01 = function (window) {
             game.addGameItem(reward);
             reward.velocityX = -3;
 
-            reward.onPlayerCollsion = function (){
+            reward.onPlayerCollision = function (){
                 game.changeIntegrity(10);
-                game.increaseScore(100);
+                game.increaseScore(300);
                 reward.fadeOut();
             }
 
@@ -190,18 +204,19 @@ var level01 = function (window) {
             }
         };
         
-        if (createEnemy < 0){
-            createEnemy = canvas.width;
-        }
 
-        //ENEMY CALLS ( this is just easier for me okay )
+        //ENEMY CALLS ( this is just easier for me okay ) 
+        //plus my graphics werent showing correctly for the other one?? 
+        //i dunno im just trying to get this done in time
 
         //lv1
-        createEnemy(400, groundY - 5);
-        createSawBlade(600, 0);
+        createEnemy(400, groundY - 5); //slug
+        createSawBlade(600, 0); //meteor
         createSawBlade(800, -130);
-        createEnemy2(800, groundY - 40);
-        createEnemy3(1000, groundY - 120);
+        createEnemy2(800, groundY - 40); //bird
+        createEnemy3(1000, groundY - 120); //ufo
+        createSpike(1100,groundY-10) //spike
+        createReward(1500, groundY - 30);
 
         //lv 2
 

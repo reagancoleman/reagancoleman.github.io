@@ -27,9 +27,10 @@ var background = function (window) {
         
         // ANIMATION VARIABLES HERE:
         
-        var tree;
+        // var tree;
         // var buildings = [];
         var mountain;
+        var mountainTwo;
         var floor;
         var floor2;
         var floor3;
@@ -38,7 +39,7 @@ var background = function (window) {
         var bigRock;
         var smallRock;
 
-
+        //i would add more if i had skillz :'|
      
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
@@ -73,13 +74,22 @@ var background = function (window) {
             background.addChild(moon); //add the moon as a child of bg
 
             //MOUNTAINS yes there will be a lot of this cause im confused >_<
-            mountain = draw.bitmap("img/mountain1.png");
+            mountain = draw.bitmap("img/mountain1.png"); //mountain 1
              mountain.x = 0;
              mountain.y = groundY - 340;
              mountain.scaleX = 1;
              mountain.scaleY = 1;
              background.addChild(mountain);
+
+             mountainTwo = draw.bitmap("img/mountain2.png"); //mountain 2
+             mountainTwo.x = 1000;
+             mountainTwo.scaleX = 0.7;
+             mountainTwo.scaleY = 0.7;
+             mountainTwo.y = groundY - 340;
+             
+             background.addChild(mountainTwo);
             
+            //ground ( kinda jank when they loop i know i dunno how to layer those correctly )
             floor = draw.bitmap("img/surface.png"); 
             floor.x = 0; 
             floor.y = groundY - 90; 
@@ -114,7 +124,11 @@ var background = function (window) {
             tallCactus.y = groundY - 230; //assign yv to tree
             background.addChild(tallCactus); //add tree to bg to make it visible
             
-             
+            //little cactus
+            smallCactus = draw.bitmap("img/cactus2.png");
+            smallCactus.x = 236;
+            smallCactus.y = groundY - 130; 
+            background.addChild(smallCactus);
 
         } // end of render function - DO NOT DELETE
         
@@ -135,13 +149,27 @@ var background = function (window) {
             if (tallCactus.x < -300) {
                 tallCactus.x = canvasWidth;
             }
-            //mountains
-            mountain.x = mountain.x - 0.5;
+            
+            //smaller cactus
+            smallCactus.x = smallCactus.x - 1;
+
+            if (smallCactus.x < -300) {
+                smallCactus.x = canvasWidth;
+            }
+
+            //mountains loops(?)
+            mountain.x = mountain.x - 0.2;
 
             if (mountain.x < -900) {
                 mountain.x = canvasWidth;
             }
 
+            //2nd mountain loop
+            mountainTwo.x = mountainTwo.x - 0.2;
+
+            if (mountainTwo.x < -900) {
+                mountainTwo.x = canvasWidth;
+            }
             
 
             //ground AAAAAAAAAAAAAAAA this took me forever to do ;-;
