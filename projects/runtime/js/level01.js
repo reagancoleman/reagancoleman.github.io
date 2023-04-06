@@ -16,15 +16,30 @@ var level01 = function (window) {
             "number": 1, 
             "speed": -3,
             "gameItems": [
-               /* { "type": "sawblade", "x": 400, "y": groundY -56 },
-                { "type": "sawblade", "x": 600, "y": groundY - 50 },
-                { "type": "sawblade", "x": 800, "y": groundY - 56},
-                { "type": "sawblade", "x": 1000, "y": groundY - 56},
+                //20 seconds
+                    { "type": "sawblade", "x": 3000, "y": groundY-60 }, //meteor
+                    { "type": "spike", "x": 800, "y": groundY - 10}, //spikes
+                    { "type": "reward", "x": 800, "y": groundY - 90 }, //battery
+                    { "type": "spike", "x": 1200, "y": groundY - 10}, //spikes
+                    { "type": "reward", "x": 1200, "y": groundY - 90 }, //battery
+                    { "type": "enemy", "x": 700, "y": groundY - 15 }, //slug
+                    { "type": "enemy3", "x": 1000, "y": groundY - 80*10 }, //ufo
+                    { "type": "enemy2", "x": 700*2, "y": groundY - 55 }, //bird 
 
-                { "type": "enemy", "x": 400, "y": groundY - 10 },
-
-                { "type": "reward", "x": 500, "y": groundY - 50 },
-            */ ]
+                //40 seconds
+                    { "type": "enemy", "x": 700*3, "y": groundY - 15 }, //slug
+                    { "type": "reward", "x": 600*3, "y": groundY - 90 }, //battery
+                    { "type": "enemy", "x": 750*3, "y": groundY - 15 }, //slug
+                    { "type": "enemy", "x": 750*3, "y": groundY - 15 }, //slug
+                    { "type": "sawblade", "x": 610, "y": 0 }, //meteor
+                    { "type": "sawblade", "x": 1000*4, "y": groundY-90 }, //meteor
+                    { "type": "sawblade", "x": 1000*6, "y": groundY-60 }, //meteor
+                    { "type": "sawblade", "x": 1000*7, "y": groundY-50 }, //meteor
+                    { "type": "sawblade", "x": 1000*8, "y": groundY-80 }, //meteor
+                    { "type": "sawblade", "x": 1000*9, "y": groundY-70 }, //meteor
+                    { "type": "enemy3", "x": 1000*8, "y": groundY - 1300*10 }, //ufo
+              
+             ]
             
         };
         window.levelData = levelData;
@@ -47,9 +62,7 @@ var level01 = function (window) {
             sawBladeHitZone.y = y; //stores y value 4 hitbox
             game.addGameItem(sawBladeHitZone); //adds hitbox as game item
             sawBladeHitZone.velocityX = -3;
-            sawBladeHitZone.velocityY = +2;
             
-
             //sawblade graphics
             var obstacleImage = draw.bitmap("img/meteor.png"); //draws image for saw and stores in ObstacleImage
             sawBladeHitZone.addChild(obstacleImage); // adds obImage as child of sawbladehitzone
@@ -57,18 +70,14 @@ var level01 = function (window) {
             obstacleImage.y = -60; //assigns value to x position
         }    
 
-            //saw / meteor loop(?)
-
-        
-
         //ENEMY 1 ( SLUG )
         function createEnemy(x, y, size, velocity){
             var enemy = game.createGameItem("enemy", 25);
         var gameEnemy = draw.bitmap("img/slug.png");
         var damageFromObstacle = 20; //damage done by hitbox
-        gameEnemy.x = -50;
-        gameEnemy.y = -56;
-        enemy.addChild(gameEnemy);
+        gameEnemy.x = -50; //enemy x position
+        gameEnemy.y = -56; //enemy y position
+        enemy.addChild(gameEnemy); //adds enemy to game as a game enemy
         enemy.x = x;
         enemy.y = y;
         game.addGameItem(enemy);
@@ -98,12 +107,8 @@ var level01 = function (window) {
         game.addGameItem(enemy);
         enemy.velocityX = -3;
 
-            if (enemy.x < 0){
-                enemy.x = canvasWidth;
-            }
-
         enemy.onPlayerCollision = function(){
-            game.changeIntegrity(-10);
+            game.changeIntegrity(-20);
         }
 
         enemy.onProjectileCollision = function(){
@@ -123,15 +128,19 @@ var level01 = function (window) {
         enemy.x = x;
         enemy.y = y;
         game.addGameItem(enemy);
-        enemy.velocityX = -2;
-        if(enemy.velocityY < groundY-20 ){
-            enemy.velocityY = +0.2;
-        } else if (enemy.velocityY > groundY-20){
-            enemy.velocityY = -0.2;
+        enemy.velocityX = -1;
+
+        //i also wanted to make this enemy go up and down, but i could only get it to go in one direction
+        //how would i be able to do this?? ( if i even can do it here )
+         if(gameEnemy.y < groundY-90 ){
+            enemy.velocityY = +1;
+        } 
+        if (gameEnemy.y > groundY-10){
+            enemy.velocityY = -1;
         }
 
         enemy.onPlayerCollision = function(){
-            game.changeIntegrity(-10);
+            game.changeIntegrity(-30);
         }
 
         enemy.onProjectileCollision = function(){
@@ -144,7 +153,7 @@ var level01 = function (window) {
         
         //SPIKES//
         function createSpike(x, y){
-            //sawblade hitbox/damage/whatever
+            //spike hitbox/damage/whatever
             var hitZoneSize = 25; //assigns value to hitbox size
             var damageFromObstacle = 20; //damage done by hitbox
             var spikeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle); //creates obstacele and stores it
@@ -154,15 +163,16 @@ var level01 = function (window) {
             spikeHitZone.y = y; //stores y value 4 hitbox
             game.addGameItem(spikeHitZone); //adds hitbox as game item
 
-            //sawblade graphics
-            var obstacleImage = draw.bitmap("img/spikes.png"); //draws image for saw and stores in ObstacleImage
-            spikeHitZone.addChild(obstacleImage); // adds obImage as child of sawbladehitzone
+            //spike graphics
+            var obstacleImage = draw.bitmap("img/spikes.png"); //draws image for spikes and stores in ObstacleImage
+            spikeHitZone.addChild(obstacleImage); // adds obImage as child of spikehitzone
             obstacleImage.x = -45; //assigns value to x position
             obstacleImage.y = -42; //assigns value to x position
             
             spikeHitZone.velocityX = -1;
 
-            if (spikeHitZone.x < 100) {
+            //yeah i tried making the spikes and meteor loop, i dunno if thats possible though:
+            if (spikeHitZone.x < 0) {
                 spikeHitZone.x = canvasWidth;
             }
         };
@@ -171,14 +181,14 @@ var level01 = function (window) {
         //helpme ( REWARD )
         function createReward(x, y ){
             var reward = game.createGameItem("reward", 25);
-            var gameItem = draw.rect(50, 50, "purple");
-            gameItem.x = -25;
-            gameItem.y = -25;
+            var gameItem = draw.bitmap("img/battery.png");
+            gameItem.x = -55;
+            gameItem.y = -55;
             reward.addChild(gameItem);
             reward.x = x;
             reward.y = y;
             game.addGameItem(reward);
-            reward.velocityX = -3;
+            reward.velocityX = -1;
 
             reward.onPlayerCollision = function (){
                 game.changeIntegrity(10);
@@ -195,8 +205,20 @@ var level01 = function (window) {
                 createSawBlade(gameItem.x, gameItem.y);
             }
 
+            if (gameItem.type === "spike"){
+                createSpike(gameItem.x, gameItem.y);
+            }
+
             if (gameItem.type === "enemy"){
-                createEnemy(gameItem.x, gameItem.y, scale.x);
+                createEnemy(gameItem.x, gameItem.y);
+            }
+
+            if (gameItem.type === "enemy2"){
+                createEnemy2(gameItem.x, gameItem.y);
+            }
+
+            if (gameItem.type === "enemy3"){
+                createEnemy3(gameItem.x, gameItem.y);
             }
 
             if (gameItem.type === "reward"){
@@ -210,16 +232,7 @@ var level01 = function (window) {
         //i dunno im just trying to get this done in time
 
         //lv1
-        createEnemy(400, groundY - 5); //slug
-        createSawBlade(600, 0); //meteor
-        createSawBlade(800, -130);
-        createEnemy2(800, groundY - 40); //bird
-        createEnemy3(1000, groundY - 120); //ufo
-        createSpike(1100,groundY-10) //spike
-        createReward(1500, groundY - 30);
-
-        //lv 2
-
+        
 
         //lv 3
 

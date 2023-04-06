@@ -74,39 +74,40 @@ var background = function (window) {
             background.addChild(moon); //add the moon as a child of bg
 
             //MOUNTAINS yes there will be a lot of this cause im confused >_<
-            mountain = draw.bitmap("img/mountain1.png"); //mountain 1
-             mountain.x = 0;
-             mountain.y = groundY - 340;
-             mountain.scaleX = 1;
-             mountain.scaleY = 1;
-             background.addChild(mountain);
+                mountain = draw.bitmap("img/mountain1.png"); //mountain 1
+                mountain.x = 0;
+                mountain.y = groundY - 340;
+                mountain.scaleX = 1; //changes x scale of the mountain ( makes it bigger/smaller )
+                mountain.scaleY = 1; //changes y scale of the mountain
+                background.addChild(mountain);
 
-             mountainTwo = draw.bitmap("img/mountain2.png"); //mountain 2
-             mountainTwo.x = 1000;
-             mountainTwo.scaleX = 0.7;
-             mountainTwo.scaleY = 0.7;
-             mountainTwo.y = groundY - 340;
-             
-             background.addChild(mountainTwo);
+                //mountain 2
+                mountainTwo = draw.bitmap("img/mountain2.png"); //mountain 2
+                mountainTwo.x = 1000;
+                mountainTwo.y = groundY - 340;
+                mountainTwo.scaleX = 0.7;
+                mountainTwo.scaleY = 0.7;
+                background.addChild(mountainTwo);
             
             //ground ( kinda jank when they loop i know i dunno how to layer those correctly )
-            floor = draw.bitmap("img/surface.png"); 
-            floor.x = 0; 
-            floor.y = groundY - 90; 
-            background.addChild(floor)
-            //ahaha i dont know how to do this optimally
-            floor2 = draw.bitmap("img/surface.png"); 
-            floor2.x = 1049; 
-            floor2.y = groundY - 90; 
-            background.addChild(floor2);
+                floor = draw.bitmap("img/surface.png"); 
+                floor.x = 0; 
+                floor.y = groundY - 90; 
+                background.addChild(floor)
+                //ahaha i dont know how to do this optimally
+                floor2 = draw.bitmap("img/surface.png"); 
+                floor2.x = 1049; 
+                floor2.y = groundY - 90; 
+                background.addChild(floor2);
 
-            floor3 = draw.bitmap("img/surface.png"); 
-            floor3.x = 2098; 
-            floor3.y = groundY - 90; 
-            background.addChild(floor3)
+                floor3 = draw.bitmap("img/surface.png"); 
+                floor3.x = 2098; 
+                floor3.y = groundY - 90; 
+                background.addChild(floor3)
             
 
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
+            // didn't use this one sorry :(
             /* for (var i = 0; i < 5; ++i) {
                     var buildingHeights = [ 220, 250, 180, 300 ];
                     var buildingColors = ['cyan', 'limegreen', 'lightpink', 'yellow']
@@ -119,16 +120,30 @@ var background = function (window) {
 
             // TODO 4: Part 1 - Add a tree ( i kinda just replaced the tree with cactus, is that okay??)
             
-            tallCactus = draw.bitmap("img/cactus.png"); //uses bitmap to draw image and stores it in var tree
-            tallCactus.x = 100; // assign xv to tree
-            tallCactus.y = groundY - 230; //assign yv to tree
-            background.addChild(tallCactus); //add tree to bg to make it visible
-            
-            //little cactus
-            smallCactus = draw.bitmap("img/cactus2.png");
-            smallCactus.x = 236;
-            smallCactus.y = groundY - 130; 
-            background.addChild(smallCactus);
+                tallCactus = draw.bitmap("img/cactus.png"); //uses bitmap to draw image and stores it in var tree
+                tallCactus.x = 100; // assign xv to tree
+                tallCactus.y = groundY - 230; //assign yv to tree
+                background.addChild(tallCactus); //add tree to bg to make it visible
+                
+                //little cactus
+                smallCactus = draw.bitmap("img/cactus2.png");
+                smallCactus.x = 236;
+                smallCactus.y = groundY - 130; 
+                background.addChild(smallCactus);
+
+            //rocks
+                //small rock
+                smallRock = draw.bitmap("img/smallRock.png");
+                smallRock.x = 736;
+                smallRock.y = groundY - 130; 
+                background.addChild(smallRock);
+
+                //big rock ( last one i swear)
+                //small rock
+                bigRock = draw.bitmap("img/bigRock.png");
+                bigRock.x = 1036;
+                bigRock.y = groundY - 260; 
+                background.addChild(bigRock);
 
         } // end of render function - DO NOT DELETE
         
@@ -143,53 +158,67 @@ var background = function (window) {
             
             // TODO 4: Part 2 - Move the tree!
             
-            //tree ( cactus )
-            tallCactus.x = tallCactus.x - 1;
+                //tree ( cactus )
+                tallCactus.x = tallCactus.x - 1;
 
-            if (tallCactus.x < -300) {
-                tallCactus.x = canvasWidth;
-            }
-            
-            //smaller cactus
-            smallCactus.x = smallCactus.x - 1;
+                if (tallCactus.x < -300) {
+                    tallCactus.x = canvasWidth;
+                }
+                
+                //smaller cactus
+                smallCactus.x = smallCactus.x - 1;
 
-            if (smallCactus.x < -300) {
-                smallCactus.x = canvasWidth;
-            }
+                if (smallCactus.x < -300) {
+                    smallCactus.x = canvasWidth;
+                }
 
-            //mountains loops(?)
-            mountain.x = mountain.x - 0.2;
+                //small rock
+                smallRock.x = smallRock.x - 1;
 
-            if (mountain.x < -900) {
-                mountain.x = canvasWidth;
-            }
+                if (smallRock.x < -300) {
+                    smallRock.x = canvasWidth;
+                }
 
-            //2nd mountain loop
-            mountainTwo.x = mountainTwo.x - 0.2;
+                //big rock
+                bigRock.x = bigRock.x - 1;
 
-            if (mountainTwo.x < -900) {
-                mountainTwo.x = canvasWidth;
-            }
+                if (bigRock.x < -300) {
+                    bigRock.x = canvasWidth;
+                }
+
+                //mountains loops(?)
+                mountain.x = mountain.x - 0.2;
+
+                if (mountain.x < -900) {
+                    mountain.x = canvasWidth;
+                }
+
+                //2nd mountain loop
+                mountainTwo.x = mountainTwo.x - 0.2;
+
+                if (mountainTwo.x < -900) {
+                    mountainTwo.x = canvasWidth;
+                }
+
+
             
 
             //ground AAAAAAAAAAAAAAAA this took me forever to do ;-;
-            floor.x = floor.x - 1;
+                floor.x = floor.x - 1;
 
-            if (floor.x < -1100) {
-                floor.x = canvasWidth + 500;
-            }
-            floor2.x = floor2.x - 1;
+                if (floor.x < -1100) {
+                    floor.x = canvasWidth + 500;
+                }
+                floor2.x = floor2.x - 1;
 
-            if (floor2.x < -1100) {
-                floor2.x = canvasWidth + 500;
-            } 
-            floor3.x = floor3.x - 1;
+                if (floor2.x < -1100) {
+                    floor2.x = canvasWidth + 500;
+                } 
+                floor3.x = floor3.x - 1;
 
-            if (floor3.x < -1100) {
-                floor3.x = canvasWidth + 500;
-            } 
-
-            //bg objects
+                if (floor3.x < -1100) {
+                    floor3.x = canvasWidth + 500;
+                } 
             
             // TODO 5: Part 2 - Parallax
             
