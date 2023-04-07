@@ -182,7 +182,7 @@ var background = function (window) {
                 //big rock
                 bigRock.x = bigRock.x - 1;
 
-                if (bigRock.x < -300) {
+                if (bigRock.x < -400) {
                     bigRock.x = canvasWidth;
                 }
 

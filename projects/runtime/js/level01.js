@@ -28,16 +28,26 @@ var level01 = function (window) {
 
                 //40 seconds
                     { "type": "enemy", "x": 700*3, "y": groundY - 15 }, //slug
+                    { "type": "spike", "x": 550*3, "y": groundY - 10}, //spikes
                     { "type": "reward", "x": 600*3, "y": groundY - 90 }, //battery
+                    { "type": "spike", "x": 650*3, "y": groundY - 10}, //spikes
                     { "type": "enemy", "x": 750*3, "y": groundY - 15 }, //slug
                     { "type": "enemy", "x": 750*3, "y": groundY - 15 }, //slug
-                    { "type": "sawblade", "x": 610, "y": 0 }, //meteor
+                    { "type": "sawblade", "x": 610, "y": 0 }, //meteor 
                     { "type": "sawblade", "x": 1000*4, "y": groundY-90 }, //meteor
                     { "type": "sawblade", "x": 1000*6, "y": groundY-60 }, //meteor
                     { "type": "sawblade", "x": 1000*7, "y": groundY-50 }, //meteor
                     { "type": "sawblade", "x": 1000*8, "y": groundY-80 }, //meteor
                     { "type": "sawblade", "x": 1000*9, "y": groundY-70 }, //meteor
-                    { "type": "enemy3", "x": 1000*8, "y": groundY - 1300*10 }, //ufo
+                    { "type": "spike", "x": 3000, "y": groundY - 10}, //spikes
+                    { "type": "reward", "x": 3100, "y": groundY - 90 }, //battery
+                    { "type": "spike", "x": 3200, "y": groundY - 10}, //spikes
+                    { "type": "spike", "x": 3400, "y": groundY - 10}, //spikes
+                    { "type": "reward", "x": 3500, "y": groundY - 90 }, //battery
+                    { "type": "spike", "x": 3600, "y": groundY - 10}, //spikes
+                    { "type": "enemy", "x": 3000*2, "y": groundY - 15 }, //slug
+                    { "type": "enemy2", "x": 1600*10, "y": groundY - 55 }, //bird
+                    { "type": "enemy2", "x": 1600*11, "y": groundY - 35 }, //bird
               
              ]
             
